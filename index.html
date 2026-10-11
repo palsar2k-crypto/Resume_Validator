@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>0 to Shipped // Resume Parser & Skill Gap Analyzer</title>
+  <meta name="description" content="Instant ATS resume scoring and skill gap analyzer. Upload your PDF resume to check matched and missing skills." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span class="logo-badge">0 &rarr; 1</span>
+        <span class="logo-title">0 to Shipped <span class="accent-text">Resume Parser</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#demo">Live Scanner</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#features">Features</a>
+      </nav>
+
+      <div class="nav-actions">
+        <span class="status-pill"><span class="dot"></span> Mock Engine Active</span>
+        <a href="#demo" class="btn btn-sm btn-primary">Try Free</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section">
+      <div class="container hero-content">
+        <div class="hero-badge">
+          <svg class="icon-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+          </svg>
+          AI-Powered ATS Matcher &amp; Gap Detection
+        </div>
+
+        <h1 class="hero-title">
+          Score your resume.<br />
+          Find <span class="gradient-text">missing skills</span> in seconds.
+        </h1>
+        
+        <p class="hero-subtitle">
+          Upload any PDF resume to instantly evaluate its ATS score, inspect detected keywords, 
+          and uncover the high-impact skills required to land the interview.
+        </p>
+
+        <!-- Target Role Selector -->
+        <div class="role-selector-bar">
+          <label for="target-role" class="role-label">Target Role Benchmark:</label>
+          <div class="select-wrapper">
+            <select id="target-role" class="role-select">
+              <option value="fullstack" selected>Full Stack Engineer</option>
+              <option value="frontend">Frontend Developer (React / Next.js)</option>
+              <option value="backend">Backend Engineer (Node / Python / Go)</option>
+              <option value="devops">DevOps &amp; Cloud Architect</option>
+              <option value="ai">AI / ML Engineer</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parser Demo Section -->
+    <section class="demo-section" id="demo">
+      <div class="container">
+        <div class="scanner-card" id="scanner-wrapper">
+          
+          <!-- STATE 1: UPLOAD BOX -->
+          <div class="upload-zone" id="drop-zone">
+            <input type="file" id="resume-file-input" accept=".pdf,application/pdf" class="file-input-hidden" />
+            
+            <div class="upload-icon-container">
+              <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <polyline points="9 15 12 12 15 15"></polyline>
+              </svg>
+            </div>
+
+            <h3 class="upload-title">Drop your resume PDF here</h3>
+            <p class="upload-hint">Drag &amp; drop your resume or <button type="button" class="browse-link" id="browse-btn">browse your files</button></p>
+            <p class="upload-meta">PDF format supported • Maximum size 10MB</p>
+
+            <div class="sample-pills">
+              <span class="sample-pills-label">Or quick-test with preset resumes:</span>
+              <div class="pill-group">
+                <button type="button" class="btn-preset" data-preset="high">
+                  <span>🚀</span> Senior Developer (High Match)
+                </button>
+                <button type="button" class="btn-preset" data-preset="mid">
+                  <span>⚖️</span> Mid-level Dev (Average Match)
+                </button>
+                <button type="button" class="btn-preset" data-preset="junior">
+                  <span>🌱</span> Junior / Transition (Skill Gaps)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STATE 2: SCANNING / LOADING STATE -->
+          <div class="scanning-state hidden" id="scanning-state">
+            <div class="radar-scanner">
+              <div class="radar-circle"></div>
+              <div class="radar-sweep"></div>
+              <div class="radar-document">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <div class="scanning-info">
+              <h3 class="scanning-title" id="scan-step-title">Analyzing PDF document structure...</h3>
+              <p class="scanning-file" id="scan-file-name">Resume.pdf</p>
+              
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+              </div>
+              <div class="progress-details">
+                <span id="scan-percentage">0%</span>
+                <span id="scan-step-desc">Parsing text streams and layout...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STATE 3: PARSED RESULTS DASHBOARD -->
+          <div class="results-dashboard hidden" id="results-dashboard">
+            
+            <!-- Dashboard Header / Meta Bar -->
+            <div class="results-top-bar">
+              <div class="file-badge">
+                <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                <div class="file-details">
+                  <span class="file-name" id="res-file-name">candidate_resume.pdf</span>
+                  <span class="file-benchmark" id="res-benchmark-badge">Target: Full Stack Engineer</span>
+                </div>
+              </div>
+
+              <div class="results-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-reupload">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                  Scan Another PDF
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-print-summary">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8"></rect>
+                  </svg>
+                  Export Report
+                </button>
+              </div>
+            </div>
+
+            <!-- Score Hero Card -->
+            <div class="score-overview-grid">
+              
+              <!-- Primary Radial Gauge -->
+              <div class="score-card main-score-card">
+                <div class="score-card-header">
+                  <h4>Overall Match Score</h4>
+                  <span class="badge-status" id="score-status-badge">Strong Fit</span>
+                </div>
+
+                <div class="radial-gauge-container">
+                  <svg class="radial-gauge" viewBox="0 0 160 160">
+                    <circle class="gauge-bg" cx="80" cy="80" r="68"></circle>
+                    <circle class="gauge-fill" id="score-gauge-circle" cx="80" cy="80" r="68"></circle>
+                  </svg>
+                  <div class="radial-gauge-inner">
+                    <span class="score-number" id="score-display">0</span>
+                    <span class="score-max">/ 100</span>
+                  </div>
+                </div>
+
+                <p class="score-verdict" id="score-verdict-text">
+                  This resume aligns strongly with current ATS benchmarks and job requirements.
+                </p>
+              </div>
+
+              <!-- Quick Metrics Breakdown -->
+              <div class="score-card metrics-card">
+                <h4>Diagnostic Breakdown</h4>
+                
+                <div class="metric-row">
+                  <div class="metric-info">
+                    <span class="metric-name">Skill Keyword Coverage</span>
+                    <span class="metric-val" id="metric-skill-pct">85%</span>
+                  </div>
+                  <div class="meter-bar"><div class="meter-fill" id="meter-skills" style="width: 85%;"></div></div>
+                </div>
+
+                <div class="metric-row">
+                  <div class="metric-info">
+                    <span class="metric-name">Experience Relevancy</span>
+                    <span class="metric-val" id="metric-exp-pct">80%</span>
+                  </div>
+                  <div class="meter-bar"><div class="meter-fill meter-cyan" id="meter-exp" style="width: 80%;"></div></div>
+                </div>
+
+                <div class="metric-row">
+                  <div class="metric-info">
+                    <span class="metric-name">ATS Format &amp; Readability</span>
+                    <span class="metric-val" id="metric-format-pct">92%</span>
+                  </div>
+                  <div class="meter-bar"><div class="meter-fill meter-purple" id="meter-format" style="width: 92%;"></div></div>
+                </div>
+
+                <div class="stats-summary-boxes">
+                  <div class="stat-mini-box present-box">
+                    <span class="stat-count" id="stat-present-count">0</span>
+                    <span class="stat-desc">Skills Found</span>
+                  </div>
+                  <div class="stat-mini-box missing-box">
+                    <span class="stat-count" id="stat-missing-count">0</span>
+                    <span class="stat-desc">Missing Gaps</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Skills Dual Column Grid -->
+            <div class="skills-grid">
+              
+              <!-- Column 1: Skills Present -->
+              <div class="skills-card present-card">
+                <div class="skills-card-header">
+                  <div class="header-title-wrap">
+                    <div class="icon-circle success-circle">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="card-title">Skills Present</h3>
+                      <p class="card-subtitle">Detected in candidate's resume</p>
+                    </div>
+                  </div>
+                  <span class="count-pill present-pill" id="badge-present-total">0 Detected</span>
+                </div>
+
+                <div class="skills-tags-container" id="present-tags-list">
+                  <!-- Injected via JavaScript -->
+                </div>
+
+                <div class="card-footer-tip success-tip">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                  <span>Keywords are well-indexed in work experience and projects.</span>
+                </div>
+              </div>
+
+              <!-- Column 2: Skills Missing -->
+              <div class="skills-card missing-card">
+                <div class="skills-card-header">
+                  <div class="header-title-wrap">
+                    <div class="icon-circle alert-circle">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="card-title">Skills Missing</h3>
+                      <p class="card-subtitle">Recommended by benchmark for target role</p>
+                    </div>
+                  </div>
+                  <span class="count-pill missing-pill" id="badge-missing-total">0 Gaps</span>
+                </div>
+
+                <div class="skills-tags-container" id="missing-tags-list">
+                  <!-- Injected via JavaScript -->
+                </div>
+
+                <div class="card-footer-tip alert-tip">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                  <span>Adding 2-3 of these high-priority keywords can boost your match by up to 18%.</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Resume Action Recommendation Banner -->
+            <div class="recommendations-banner">
+              <div class="banner-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+              </div>
+              <div class="banner-body">
+                <h4>Next Step Recommendation</h4>
+                <p id="recommendation-text">
+                  Incorporate the top missing technical skills into your latest project bullet points with measurable impact metrics to pass automated resume filters.
+                </p>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm" id="btn-copy-summary">
+                Copy Skill Gap Summary
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section-how" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Workflow</span>
+          <h2 class="section-title">Zero to Shipped in 3 Simple Steps</h2>
+          <p class="section-description">See how recruiters and modern ATS pipelines inspect resumes behind the scenes.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <h3 class="step-title">Upload Resume PDF</h3>
+            <p class="step-desc">Drop your PDF resume. The system inspects font glyphs, layout hierarchies, and section segments.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">02</div>
+            <h3 class="step-title">Extract &amp; Cross-Match</h3>
+            <p class="step-desc">Cross-references verified technical and domain skills against curated industry job requirement benchmarks.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <h3 class="step-title">Score &amp; Uncover Gaps</h3>
+            <p class="step-desc">Receive an instant match score out of 100 alongside clear green tags for found skills and red tags for missing ones.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section class="section-features" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Capabilities</span>
+          <h2 class="section-title">Engineered for Rapid Talent Analysis</h2>
+          <p class="section-description">Everything you need to optimize candidate matching without complexity.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon bg-emerald">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3>Precision Keyword Detection</h3>
+            <p>Distinguishes actual engineering competencies from common buzzwords and soft skills.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon bg-rose">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <h3>Critical Gap Identification</h3>
+            <p>Know exactly which high-yield libraries, tools, or frameworks are preventing a 90+ score.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon bg-violet">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+            </div>
+            <h3>Dynamic Target Benchmarks</h3>
+            <p>Switch between Full Stack, Frontend, Backend, or DevOps requirements on the fly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <div class="footer-logo">
+          <span class="logo-badge">0 &rarr; 1</span>
+          <span>0 to Shipped Resume Parser</span>
+        </div>
+        <p class="footer-note">Client-side mock interactive landing page demonstration.</p>
+      </div>
+      <div class="footer-right">
+        <span>Pure HTML &bull; CSS &bull; Vanilla JavaScript</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
