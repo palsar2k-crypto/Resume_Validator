@@ -1,5 +1,5 @@
 /**
- * 0 to Shipped Resume Parser - Client Logic
+ * Resume Validator - Client Logic
  * Realistic front-end mock parsing engine & skill gap analyzer
  */
 
@@ -130,6 +130,7 @@ const btnReupload = document.getElementById("btn-reupload");
 const btnPrintSummary = document.getElementById("btn-print-summary");
 const btnCopySummary = document.getElementById("btn-copy-summary");
 const toastContainer = document.getElementById("toast-container");
+const themeToggleBtn = document.getElementById("theme-toggle");
 
 // SVG Icons Helpers
 const CHECK_ICON_SVG = `
@@ -147,8 +148,29 @@ const CROSS_ICON_SVG = `
 
 // Initialize Application
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
   setupEventListeners();
 });
+
+// Theme Management (Dark / Light)
+function initTheme() {
+  const savedTheme = localStorage.getItem("rv-theme");
+  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const initialTheme = savedTheme ? savedTheme : (prefersDark ? "dark" : "dark");
+  applyTheme(initialTheme);
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("rv-theme", theme);
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+  applyTheme(newTheme);
+  showToast(`Theme switched to ${newTheme.toUpperCase()} mode`, "info");
+}
 
 function setupEventListeners() {
   // Click browse button
@@ -214,6 +236,11 @@ function setupEventListeners() {
 
   // Re-upload button
   btnReupload.addEventListener("click", resetToUploadZone);
+
+  // Theme toggle button
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", toggleTheme);
+  }
 
   // Print / Export button
   btnPrintSummary.addEventListener("click", () => {
@@ -545,7 +572,7 @@ function resetToUploadZone() {
 // Copy Summary to Clipboard
 function copySummaryToClipboard() {
   const summary = `
-=== 0 to Shipped Resume Parser Report ===
+=== Resume Validator Report ===
 File: ${currentScanState.fileName}
 Target Role: ${ROLE_BENCHMARKS[roleSelect.value].title}
 Overall ATS Match Score: ${currentScanState.score} / 100

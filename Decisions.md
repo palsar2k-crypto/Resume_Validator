@@ -1,1 +1,14 @@
-I want to build an HTML, CSS, JS landing page for my resume parser, where I should be able to upload an PDF and get the score out of it. Here I just want to see the score, what skills are present, and what skills are missing. And I'm gonna call this as 0 to shipped resume parser. This is gonna be a mock design, so just build html css is fine, no back-end server is needed
+# Project: Resume Validator (formerly 0 to Shipped Resume Parser)
+
+## Product Requirements
+- **Goal:** Mock ATS Resume Validator & Skill Gap Analyzer landing page.
+- **Frontend Stack:** HTML5, CSS3, Vanilla JavaScript (No backend required).
+- **Core Functionality:**
+  - PDF Resume upload (via drag & drop or file picker).
+  - Quick-test sample preset resumes (Senior, Mid-level, Junior/Career Transition).
+  - Dynamic ATS Match Score gauge (out of 100).
+  - Dual skill breakdown: Skills Present (detected) & Skills Missing (gaps).
+  - Diagnostic breakdown (Keyword Coverage, Experience Relevancy, Formatting Integrity).
+  - Target Role Benchmark switching (Full Stack, Frontend, Backend, DevOps, AI/ML).
+- **Branding:** Rebranded to "Resume Validator" with checkmark verification badge.
+- **Theme Support:** Dual-theme system (Dark mode & Light mode) with navbar toggle button, system preference detection, and localStorage persistence.

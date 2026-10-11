@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>0 to Shipped // Resume Parser & Skill Gap Analyzer</title>
+  <title>Resume Validator // ATS Score &amp; Skill Gap Analyzer</title>
   <meta name="description" content="Instant ATS resume scoring and skill gap analyzer. Upload your PDF resume to check matched and missing skills." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,8 +20,13 @@
   <header class="navbar">
     <div class="nav-container">
       <a href="#" class="logo">
-        <span class="logo-badge">0 &rarr; 1</span>
-        <span class="logo-title">0 to Shipped <span class="accent-text">Resume Parser</span></span>
+        <span class="logo-badge">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </span>
+        <span class="logo-title">Resume <span class="accent-text">Validator</span></span>
       </a>
 
       <nav class="nav-links">
@@ -31,6 +36,22 @@
       </nav>
 
       <div class="nav-actions">
+        <button type="button" class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+          <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
         <span class="status-pill"><span class="dot"></span> Mock Engine Active</span>
         <a href="#demo" class="btn btn-sm btn-primary">Try Free</a>
       </div>
@@ -343,7 +364,7 @@
       <div class="container">
         <div class="section-header">
           <span class="section-tag">Workflow</span>
-          <h2 class="section-title">Zero to Shipped in 3 Simple Steps</h2>
+          <h2 class="section-title">Validate in 3 Simple Steps</h2>
           <p class="section-description">See how recruiters and modern ATS pipelines inspect resumes behind the scenes.</p>
         </div>
 
@@ -421,8 +442,13 @@
     <div class="container footer-content">
       <div class="footer-left">
         <div class="footer-logo">
-          <span class="logo-badge">0 &rarr; 1</span>
-          <span>0 to Shipped Resume Parser</span>
+          <span class="logo-badge">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </span>
+          <span>Resume Validator</span>
         </div>
         <p class="footer-note">Client-side mock interactive landing page demonstration.</p>
       </div>
